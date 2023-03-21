@@ -18,7 +18,7 @@ void printReport(vector<int> &arr, const string &title = "Report") {
     cout << endl;
 }
 
-// Задача: заменить стандартный метод вектора push_back
+// Задача: заменить стандартный метод вектора push_back. Вариант 1
 vector<int> addToEndOfQueue(vector<int> &arr, int addedValue) {
     size_t newSize = (arr.size() + 1);
     vector<int> temp(newSize);
@@ -29,6 +29,15 @@ vector<int> addToEndOfQueue(vector<int> &arr, int addedValue) {
 
     return temp;
 }
+
+// Задача: заменить стандартный метод вектора push_back. Вариант 2
+vector<int> &addToEndOfQueueR(vector<int> &arr, int addedValue) {
+    arr.resize(arr.size() + 1);
+    arr[arr.size() - 1] = addedValue;
+
+    return arr;
+}
+
 
 // Задача: реализовать вставку в указанную позицию без библиотечной функции
 vector<int> insertToQueue(vector<int> &arr, int addedValue, int position) {
@@ -51,7 +60,7 @@ vector<int> changeVector(vector<int> &arr, int addedValue, int position = -1) {
     bool isInsertionPosition = position >= 0 && position < arr.size();
     return (isInsertionPosition)
            ? insertToQueue(arr, addedValue, position)
-           : addToEndOfQueue(arr, addedValue);
+           : addToEndOfQueueR(arr, addedValue);
 }
 
 // Задание 1. Очередь из роботов + Задание 3. Роботы и коррупция
@@ -100,8 +109,10 @@ void calcAverageTemperature() {
 
     assert(!arr.empty());
 
+    auto average = (double) ((double) sum / (int) arr.size());
+
     cout << "(log) Sum: " << sum << endl;
-    cout << "(log) Average: " << (sum / arr.size()) << endl;
+    cout << "(log) Average: " << average << endl;
 }
 
 int main() {
@@ -109,5 +120,5 @@ int main() {
     expandRobotQueue();
 
     // Для задания 2:
-    //     calcAverageTemperature();
+    //        calcAverageTemperature();
 }
